@@ -75,7 +75,7 @@ class Course(models.Model):
 
 
 class Class(models.Model):
-    # courses = models.ManyToManyField(Course, default=1)
+    courses = models.ManyToManyField(Course, default=1)
     id = models.CharField(primary_key='True', max_length=100)
     dept = models.ForeignKey(Dept, on_delete=models.CASCADE)
     section = models.CharField(max_length=100)
@@ -240,7 +240,7 @@ class Marks(models.Model):
     def total_marks(self):
         if self.name == 'Semester End Exam':
             return 100
-        return 20
+        return 2
 
 
 class MarksClass(models.Model):
@@ -255,7 +255,7 @@ class MarksClass(models.Model):
     def total_marks(self):
         if self.name == 'Semester End Exam':
             return 100
-        return 20
+        return 0
 
 
 class AttendanceRange(models.Model):
@@ -264,8 +264,6 @@ class AttendanceRange(models.Model):
 
 
 # Triggers
-
-
 def daterange(start_date, end_date):
     for n in range(int((end_date - start_date).days)):
         yield start_date + timedelta(n)
